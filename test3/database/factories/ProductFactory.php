@@ -14,7 +14,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->title(),
+            'name' => $this->faker->sentence(),
             'price' => $this->faker->numberBetween(10,100),
             'description' => '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
             'is_verified' => $this->faker->boolean()
