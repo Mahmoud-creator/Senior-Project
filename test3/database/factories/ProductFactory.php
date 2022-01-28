@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -15,6 +16,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(),
+            'category_id' => Category::factory(),
             'price' => $this->faker->numberBetween(10,100),
             'description' => '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
             'is_verified' => $this->faker->boolean()

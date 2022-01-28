@@ -44,7 +44,7 @@
                         Back to Products
                     </a>
                     <div class="hidden lg:block">
-                        Price: 
+                        Price:
                         <a
                            class="transition-colors duration-300 text-xl font-semibold bg-red-200 hover:bg-red-300 rounded-full py-2 px-2"
                         >{{ $product->price }}$</a>
