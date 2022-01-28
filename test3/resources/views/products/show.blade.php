@@ -9,20 +9,21 @@
                     Published <time>{{ $product->created_at->diffForHumans() }}</time>
                 </p>
 
-                <div class="flex items-center lg:justify-center text-sm mt-4">
-                    <img src="/images/lary-avatar.svg" alt="Lary avatar">
-                    <div class="ml-3 text-left">
-                        <h5 class="font-bold">Brand</h5>
+                <div class="flex items-center lg:justify-center lg:align-center text-sm mt-4">
+                    <div class="flex items-center text-md px-4">
+                        <div class="ml-3">
+                            <h5 class="font-bold">Upvote⬆</h5>
+                            <p class="border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1">4</p>
+                        </div>
                     </div>
 
-                    <div class="flex items-center text-sm">
-                        <div class="ml-3">
-                            <h5 class="font-bold">Upvote</h5>
-                        </div>
+                    <div class="flex items-center text-md">
                         <div class="ml-3">
                             <h5 class="font-bold">Verify</h5>
+                            <p class="hover: border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1">8</p>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -42,7 +43,12 @@
 
                         Back to Products
                     </a>
-
+                    <div class="hidden lg:block">
+                        Price: 
+                        <a
+                           class="transition-colors duration-300 text-xl font-semibold bg-red-200 hover:bg-red-300 rounded-full py-2 px-2"
+                        >{{ $product->price }}$</a>
+                    </div>
                     <div class="space-x-2">
                         <a href="#"
                            class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
@@ -60,6 +66,8 @@
                 <div class="space-y-4 lg:text-lg leading-loose">
                     {!! $product->description !!}
                 </div>
+
+
             </div>
         </article>
     </main>

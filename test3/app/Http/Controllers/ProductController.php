@@ -8,12 +8,11 @@ class ProductController extends Controller
 {
     public function index()
     {
-        //
         return view('products.index', [
-            'products' => Product::all()
-//                ->filter(request(['search', 'category', 'author']))
-//                ->paginate(6)->withQueryString(),
-        ]);
+            'products' => Product::latest()
+                ->filter(request(['search']))
+                ->paginate(6)->withQueryString()
+            ]);
     }
 
     public function show(Product $product)

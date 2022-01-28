@@ -18,6 +18,7 @@
         @else
             <p class="text-danger text-center">No products yet. Please check back later.</p>
         @endif
+            {{ $products->links() }}
 
     </main>
 </x-layout>
