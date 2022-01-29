@@ -12,14 +12,21 @@
                        class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
                        style="font-size: 10px">Product Shop</a>
 
-                    <a href="#"
+                    <a href="/?category={{ $product->category->slug }}"
                        class="px-3 py-1 border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold"
                        style="font-size: 10px">{{ $product->category->name }}</a>
+
+
+                    <a href="/?filter={{  ($product->is_verified === 1) ? '1' : "2"  }}"
+                       class="px-3 py-1 border border-red-300 rounded-full text-xl uppercase font-semibold {{ ($product->is_verified === 1) ? "text-blue-500" : "text-red-500" }}"
+                        style="font-size: 10px">{{  ($product->is_verified === 1) ? 'VERIFIED ✔' : "NOT_VERIFIED ✖"  }}
+
+                    </a>
                 </div>
 
                 <div class="mt-4">
                     <h1 class="text-3xl">
-                        <a href="/products/{{ $product->id }}">
+                        <a href="/products/{{ $product->slug }}">
                             {{ $product->name }}
                         </a>
                     </h1>

@@ -9,8 +9,8 @@ class ProductController extends Controller
     public function index()
     {
         return view('products.index', [
-            'products' => Product::latest()
-                ->filter(request(['search','category','author']))
+            'products' => Product::orderBy('price', 'asc')
+                ->filter(request(['search','category','filter']))
                 ->paginate(6)->withQueryString()
             ]);
     }
@@ -21,7 +21,6 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
-
 
 
 }
