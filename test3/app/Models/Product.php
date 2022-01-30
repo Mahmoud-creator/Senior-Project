@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -43,7 +42,27 @@ class Product extends Model
             }
         });
 
-
     }
+
+    public function upvotes()
+    {
+        return $this->hasMany(Upvote::class);
+    }
+
+    public function upvotedBy(User $user){
+        return $this->upvotes()->where('user_id',$user->id);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function likedBy(User $user){
+        return $this->likes()->contains('user_id',$user->id);
+    }
+
+
+
 
 }

@@ -19,7 +19,8 @@ class ProductFactory extends Factory
             'name' => $this->faker->sentence(),
             'slug' => $this->faker->slug(),
             'category_id' => Category::factory(),
-            //'shop_id' => Shop::factory(),
+            'num_of_verifications' => $this->faker->numberBetween(0,5),
+            'num_of_upvotes' => $this->faker->numberBetween(0,0),
             'price' => $this->faker->numberBetween(10,100),
             'description' => '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
             'is_verified' => $this->faker->boolean()

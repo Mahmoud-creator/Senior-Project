@@ -21,6 +21,8 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->integer('price');
             $table->text('description');
+            $table->unsignedInteger('num_of_verifications')->default(0);
+            $table->unsignedInteger('num_of_upvotes')->default(0);
             $table->boolean('is_verified')->default(false);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

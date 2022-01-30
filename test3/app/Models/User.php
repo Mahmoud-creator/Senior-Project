@@ -42,4 +42,12 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function upvotes(){
+        $this->hasMany(Upvote::class);
+    }
+
+    public function likes(){
+        $this->hasMany(Like::class);
+    }
 }

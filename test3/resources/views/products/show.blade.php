@@ -12,19 +12,32 @@
                 <div class="flex items-center lg:justify-center lg:align-center text-sm mt-4">
                     <div class="flex items-center text-md px-4">
                         <div class="ml-3">
-                            <h5 class="font-bold">Upvote⬆</h5>
-                            <p class="border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1">4</p>
+                            <form method="POST" action="/product/{{ $product->id }}/upvotes">
+                                @csrf
+                                <button class="font-bold">Upvote⬆</button>
+                            </form>
+                            <p class="border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1 px-7">{{ $product->upvotes->count() }}</p>
                         </div>
-                    </div>
-
-                    <div class="flex items-center text-md">
                         <div class="ml-3">
-                            <h5 class="font-bold">Verify</h5>
-                            <p class="hover: border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1">8</p>
+                            <form method="POST" action="/product/{{ $product->id }}/likes">
+                                @csrf
+                                <button class="font-bold">Verify</button>
+                            </form>
+                            <p class="hover: border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1 px-8">{{ $product->likes->count() }}</p>
                         </div>
                     </div>
 
                 </div>
+                @if(session()->has('stop'))
+                    <div x-data="{show: true}"
+                         x-init="setTimeout(() => show = false, 4000)"
+                         x-show="show"
+                         class="bg-red-400 text-white px-4 py-2 rounded-xl text-sm mt-8">
+                        <p>
+                            {{ session('stop') }}
+                        </p>
+                    </div>
+                @endif
             </div>
 
             <div class="col-span-8">
