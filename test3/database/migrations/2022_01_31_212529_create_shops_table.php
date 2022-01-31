@@ -15,13 +15,13 @@ class CreateShopsTable extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('owner_id')->constrained()->cascadeOnDelete();
             $table->string('name');
+            $table->string('email')->unique();
             $table->string('country');
             $table->string('city');
             $table->string('street');
-            $table->tinyInteger('phone');
-            $table->foreignId('owner_name');
-            $table->foreignId('owner_email');
+            $table->string('phone')->unique();
             $table->string('password');
             $table->timestamps();
         });

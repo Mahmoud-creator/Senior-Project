@@ -10,20 +10,20 @@
                 </p>
 
                 <div class="flex items-center lg:justify-center lg:align-center text-sm mt-4">
-                    <div class="flex items-center text-md px-4">
+                    <div class="flex items-center justify-between text-md px-4">
                         <div class="ml-3">
                             <form method="POST" action="/product/{{ $product->id }}/upvotes">
                                 @csrf
-                                <button class="font-bold">Upvote⬆</button>
+                                <button class="font-bold" width='50' height='10'>Upvote⬆</button>
                             </form>
                             <p class="border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1 px-7">{{ $product->upvotes->count() }}</p>
                         </div>
                         <div class="ml-3">
-                            <form method="POST" action="/product/{{ $product->id }}/likes">
+                            <form method="POST" action="/product/{{ $product->id }}/confirm">
                                 @csrf
-                                <button class="font-bold">Verify</button>
+                                <button class="font-bold" width='50' height='10'>Verify</button>
                             </form>
-                            <p class="hover: border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1 px-8">{{ $product->likes->count() }}</p>
+                            <p class="hover: border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1 px-8">{{ $product->confirms->count() }}</p>
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@
                            style="font-size: 10px">Product Shop</a>
                         <a href="#"
                            class="px-3 py-1 border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold"
-                           style="font-size: 10px">Product Category</a>
+                           style="font-size: 10px">{{ $product->category->name }}</a>
                     </div>
                 </div>
 

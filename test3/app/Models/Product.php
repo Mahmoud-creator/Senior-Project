@@ -29,17 +29,17 @@ class Product extends Model
         );
 
         $query->when($filters['filter'] ?? false, function ($query, $filter) {
-            if($filter == 2){
-                return $query->where(fn($query) => $query
-                    ->where('is_verified', '=', 0)
-                );
-            }elseif($filter == 1){
-                return $query->where(fn($query) => $query
-                    ->where('is_verified', '=', 1)
-                );
-            }else{
+            if ($filter == 2) {
+                return $query->where('is_verified', '=', 0);
+            } elseif ($filter == 1) {
+                return $query->where('is_verified', '=', 1);
+            } else {
                 return 0;
             }
+        });
+
+        $query->when($filters['shop'] ?? false, function ($query, $shop) {
+            return $query->where('shop_id', $shop);
         });
 
     }
@@ -49,20 +49,30 @@ class Product extends Model
         return $this->hasMany(Upvote::class);
     }
 
-    public function upvotedBy(User $user){
-        return $this->upvotes()->where('user_id',$user->id);
-    }
-
-    public function likes()
+    public function upvotedBy(User $user)
     {
-        return $this->hasMany(Like::class);
+        return $this->upvotes()->where('user_id', $user->id);
     }
 
-    public function likedBy(User $user){
-        return $this->likes()->contains('user_id',$user->id);
+    public function confirms()
+    {
+        return $this->hasMany(Confirm::class);
     }
 
+    public function confirmedBy(User $user)
+    {
+        return $this->confirms()->where('user_id', $user->id);
+    }
 
+    public function is_verified(Product $product)
+    {
+        return $product->confirms()->count() >= 5;
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
 
 
 }

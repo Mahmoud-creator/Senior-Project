@@ -17,13 +17,12 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(),
+            'shop_id' => Shop::factory(),
             'slug' => $this->faker->slug(),
             'category_id' => Category::factory(),
-            'num_of_verifications' => $this->faker->numberBetween(0,5),
-            'num_of_upvotes' => $this->faker->numberBetween(0,0),
             'price' => $this->faker->numberBetween(10,100),
             'description' => '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
-            'is_verified' => $this->faker->boolean()
+            'is_verified' => false,
         ];
     }
 }

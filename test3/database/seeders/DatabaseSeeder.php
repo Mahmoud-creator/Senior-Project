@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Owner;
 use App\Models\Product;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -15,13 +17,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Product::factory(50)->create();
-        User::factory(50)->create();
+        for($i = 0;$i<4;$i++){
+            $shop = Shop::factory()->create();
+            Product::factory(5)->create([
+                'shop_id' => $shop->id
+            ]);
+        }
+        User::factory(20)->create();
+
         User::create([
             'name' => 'mahmoud',
             'username' => 'Mahmoud',
             'email' => 'm@g.com',
             'password' => 'mahmoud123',
         ]);
+        User::create([
+            'name' => 'maria',
+            'username' => 'Maria',
+            'email' => 'a@g.com',
+            'password' => 'mahmoud123',
+        ]);
+
     }
 }
+

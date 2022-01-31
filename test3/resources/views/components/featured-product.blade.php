@@ -8,19 +8,18 @@
         <div class="flex-1 flex flex-col justify-between">
             <header class="mt-8 lg:mt-0">
                 <div class="space-x-2">
-                    <a href="#"
+                    <a href="/?shop={{ $product->shop->id }}"
                        class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                       style="font-size: 10px">Product Shop</a>
+                       style="font-size: 10px">{{ $product->shop->name }}</a>
 
                     <a href="/?category={{ $product->category->slug }}"
                        class="px-3 py-1 border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold"
                        style="font-size: 10px">{{ $product->category->name }}</a>
 
 
-                    <a href="/?filter={{  ($product->is_verified === 1) ? '1' : "2"  }}"
-                       class="px-3 py-1 border border-red-300 rounded-full text-xl uppercase font-semibold {{ ($product->is_verified === 1) ? "text-blue-500" : "text-red-500" }}"
-                        style="font-size: 10px">{{  ($product->is_verified === 1) ? 'VERIFIED ✔' : "NOT_VERIFIED ✖"  }}
-
+                    <a href="/?filter={{  ($product->is_verified($product)) ? '1' : "2"  }}"
+                       class="px-3 py-1 border border-red-300 rounded-full text-xl uppercase font-semibold {{ ($product->is_verified($product)) ? "text-blue-500" : "text-red-500" }}"
+                       style="font-size: 10px">{{ ($product->confirms()->where('product_id',$product->id)->count() >= 5) ? 'VERIFIED ✔' : "NOT_VERIFIED ✖"}}
                     </a>
                 </div>
 

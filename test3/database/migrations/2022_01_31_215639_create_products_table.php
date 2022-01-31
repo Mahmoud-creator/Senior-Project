@@ -15,14 +15,12 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('shop_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('shop_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id');
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('price');
             $table->text('description');
-            $table->unsignedInteger('num_of_verifications')->default(0);
-            $table->unsignedInteger('num_of_upvotes')->default(0);
             $table->boolean('is_verified')->default(false);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

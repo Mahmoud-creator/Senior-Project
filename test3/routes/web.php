@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductConfirmController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductLikeController;
 use App\Http\Controllers\ProductUpvoteController;
@@ -29,5 +30,5 @@ Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth
 // Upvote Product
 Route::post('/product/{product}/upvotes', [ProductUpvoteController::class, 'store'])->name('product.upvote');
 
-//// Verify Product
-//Route::post('/product/{product}/likes', [ProductLikeController::class, 'store'])->name('product.like');
+// Verify Product
+Route::post('/product/{product}/confirm', [ProductConfirmController::class, 'store'])->name('product.confirm');
