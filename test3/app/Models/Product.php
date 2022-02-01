@@ -74,5 +74,9 @@ class Product extends Model
         return $this->belongsTo(Shop::class);
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
 
 }

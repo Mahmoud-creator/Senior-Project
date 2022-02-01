@@ -79,9 +79,15 @@
                 <div class="space-y-4 lg:text-lg leading-loose">
                     {!! $product->description !!}
                 </div>
-
-
             </div>
+            <section class="col-start-5 col-span-8 mt-10 space-y-6">
+
+                @include('products._add-comment-form')
+
+                @foreach($product->comments as $comment)
+                    <x-product-comment :comment="$comment"></x-product-comment>
+                @endforeach
+            </section>
         </article>
     </main>
 

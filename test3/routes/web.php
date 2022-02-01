@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductCommentsController;
 use App\Http\Controllers\ProductConfirmController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductLikeController;
@@ -26,6 +27,12 @@ Route::get('/login', [SessionsController::class, 'create'])->middleware('guest')
 Route::post('/login', [SessionsController::class, 'store'])->middleware('guest');
 
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+//mahmoudshawish2020@gmail.com
+
+// Comment
+Route::post('/products/{product:slug}/comments', [ProductCommentsController::class, 'store']);
+
 
 // Upvote Product
 Route::post('/product/{product}/upvotes', [ProductUpvoteController::class, 'store'])->name('product.upvote');
