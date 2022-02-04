@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('price');
+            $table->string('thumbnail')->nullable();
             $table->text('description');
             $table->boolean('is_verified')->default(false);
             $table->timestamp('published_at')->nullable();

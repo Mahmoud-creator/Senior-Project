@@ -2,28 +2,35 @@
 
     <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
         <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
+
             <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
+                <div class="ro rounded-fu b bg-gray-100 rounded-full my-2 py-1 font-bold text-red-500">
+                    Price:
+                    <a
+                       class=""
+                    >{{ $product->price }}$</a>
+                </div>
                 <img src="/images/illustration-1.png" alt="" class="rounded-xl">
 
                 <p class="mt-4 block text-gray-400 text-xs">
                     Published <time>{{ $product->created_at->diffForHumans() }}</time>
                 </p>
 
-                <div class="flex items-center lg:justify-center lg:align-center text-sm mt-4">
-                    <div class="flex items-center justify-between text-md px-4">
-                        <div class="ml-3">
+                <div class="text-sm mt-4">
+                    <div class="grid grid-cols-2">
+                        <div class="ml-3 b align justify-aroun flex justify-around items-center rounded-full px-3.5 py-1.5 bg-gray-100 text-blue-500 hover:bg-blue-400 hover:text-white">
                             <form method="POST" action="/product/{{ $product->id }}/upvotes">
                                 @csrf
-                                <button class="font-bold" width='50' height='10'>Upvote⬆</button>
+                                <button>Upvote⬆</button>
                             </form>
-                            <p class="border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1 px-7">{{ $product->upvotes->count() }}</p>
+                            <p>{{ $product->upvotes->count() }}</p>
                         </div>
-                        <div class="ml-3">
+                        <div class="ml-3 b align justify-aroun flex justify-around items-center rounded-full px-3.5 py-1.5 bg-gray-100 text-blue-500 hover:bg-blue-400 hover:text-white">
                             <form method="POST" action="/product/{{ $product->id }}/confirm">
                                 @csrf
-                                <button class="font-bold" width='50' height='10'>Verify</button>
+                                <button class="">Verify✓</button>
                             </form>
-                            <p class="hover: border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold py-1 px-8">{{ $product->confirms->count() }}</p>
+                            <p>{{ $product->confirms->count() }}</p>
                         </div>
                     </div>
 
@@ -35,6 +42,15 @@
                          class="bg-red-400 text-white px-4 py-2 rounded-xl text-sm mt-8">
                         <p>
                             {{ session('stop') }}
+                        </p>
+                    </div>
+                @elseif(session()->has('omit'))
+                    <div x-data="{show: true}"
+                         x-init="setTimeout(() => show = false, 4000)"
+                         x-show="show"
+                         class="bg-blue-400 text-white px-4 py-2 rounded-xl text-sm mt-8">
+                        <p>
+                            {{ session('omit') }}
                         </p>
                     </div>
                 @endif
@@ -56,12 +72,6 @@
 
                         Back to Products
                     </a>
-                    <div class="hidden lg:block">
-                        Price:
-                        <a
-                           class="transition-colors duration-300 text-xl font-semibold bg-red-200 hover:bg-red-300 rounded-full py-2 px-2"
-                        >{{ $product->price }}$</a>
-                    </div>
                     <div class="space-x-2">
                         <a href="#"
                            class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"

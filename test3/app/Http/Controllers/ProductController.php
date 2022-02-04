@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Owner;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -19,6 +20,13 @@ class ProductController extends Controller
     {
         return view('products.show', [
             'product' => $product
+        ]);
+    }
+
+    public function create(Owner $owner)
+    {
+        return view('admin.products.create',[
+            'owner' => $owner
         ]);
     }
 

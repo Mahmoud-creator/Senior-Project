@@ -12,6 +12,9 @@
                     <x-form.button>Register</x-form.button>
                 </form>
             </x-panel>
+            <div class="flex flex-1">
+                <a href="/register-owner" class="mx-auto">or register your shop</a>
+            </div>
         </main>
     </section>
 </x-layout>

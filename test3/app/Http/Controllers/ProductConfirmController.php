@@ -9,7 +9,7 @@ class ProductConfirmController extends Controller
     public function store(Product $product)
     {
         if($product->is_verified($product)){
-            return back()->with('stop', 'This product is already verified!');
+            return back()->with('omit', 'This product is already verified!');
         }else{
             if ($product->confirmedBy(request()->user())->count()) {
                 return back()->with('stop', 'You have already verified this product!');

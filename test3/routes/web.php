@@ -1,14 +1,13 @@
 <?php
 
+use App\Http\Controllers\OwnerProductController;
+use App\Http\Controllers\OwnerRegisterController;
 use App\Http\Controllers\ProductCommentsController;
 use App\Http\Controllers\ProductConfirmController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductLikeController;
 use App\Http\Controllers\ProductUpvoteController;
-use App\Http\Controllers\ProductVerifyController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-use App\Models\Upvote;
 use Illuminate\Support\Facades\Route;
 
 // Home view page
@@ -18,8 +17,15 @@ Route::get('/', [ProductController::class, 'index'])->middleware('auth')->name('
 Route::get('products/{product:slug}', [ProductController::class, 'show'])->middleware('auth')->name('product.show');
 
 // Register page
+Route::get('/User-register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('/User-register', [RegisterController::class, 'store'])->middleware('guest');
+
+// User-Register page
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
+Route::get('/register-owner', [OwnerRegisterController::class, 'create'])->middleware('guest');
+
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+Route::post('/register-owner', [OwnerRegisterController::class, 'store'])->middleware('guest');
 
 
 // Login Logout
@@ -39,3 +45,9 @@ Route::post('/product/{product}/upvotes', [ProductUpvoteController::class, 'stor
 
 // Verify Product
 Route::post('/product/{product}/confirm', [ProductConfirmController::class, 'store'])->name('product.confirm');
+
+// Owners
+Route::get('/owner:{owner}/dashboard', [OwnerProductController::class, 'index'])->name('owner.dashboard');
+Route::get('/owners{owner}/products/create', [ProductController::class, 'create']);
+Route::post('/owner/products', [OwnerProductController::class, 'store']);
+

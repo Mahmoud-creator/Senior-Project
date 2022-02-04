@@ -7,7 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine.js" integrity="sha512-nIwdJlD5/vHj23CbO2iHCXtsqzdTTx3e3uAmpTm4x2Y8xCIFyWu4cSIV8GaGe2UNVq86/1h9EgUZy7tn243qdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,200;0,400;0,500;0,700;1,200;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,200;0,400;0,500;0,700;1,200;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
 <body style="font-family: Open Sans, sans-serif">
 <section class="px-6 py-8">
@@ -24,10 +24,9 @@
                     <x-slot name="trigger">
                         <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</button>
                     </x-slot>
-
 {{--                    @admin--}}
-{{--                    <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">All Posts</x-dropdown-item>--}}
-{{--                    <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>--}}
+{{--                    <x-dropdown-item href="/admin/products" :active="request()->is('admin/products')">All Posts</x-dropdown-item>--}}
+{{--                    <x-dropdown-item href="/admin/products/create" :active="request()->is('admin/products/create')">New Post</x-dropdown-item>--}}
 {{--                    @endadmin--}}
 
                     <x-dropdown-item href="" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
@@ -53,7 +52,7 @@
 
     <footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
         <img src="/images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
-        <h5 class="text-3xl">Stay in touch with the latest posts</h5>
+        <h5 class="text-3xl">Stay in touch with the latest products</h5>
         <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
 
         <div class="mt-10">

@@ -22,7 +22,6 @@ class CreateShopsTable extends Migration
             $table->string('city');
             $table->string('street');
             $table->string('phone')->unique();
-            $table->string('password');
             $table->timestamps();
         });
     }
