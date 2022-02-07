@@ -1,0 +1,36 @@
+Files And Changes on Project After Breeze Installation:
+
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   app/Providers/RouteServiceProvider.php
+	modified:   composer.json
+	modified:   composer.lock
+	modified:   package.json
+	modified:   resources/css/app.css
+	modified:   resources/js/app.js
+	modified:   resources/views/welcome.blade.php
+	modified:   routes/web.php
+	modified:   webpack.mix.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	../package-lock.json
+	app/Http/Controllers/Auth/
+	app/Http/Requests/
+	app/View/
+	package-lock.json
+	public/css/
+	public/js/
+	public/mix-manifest.json
+	resources/views/auth/
+	resources/views/components/
+	resources/views/dashboard.blade.php
+	resources/views/layouts/
+	routes/auth.php
+	tailwind.config.js
+	tests/Feature/Auth/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
