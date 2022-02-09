@@ -10,11 +10,13 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 
-// Home view page
-Route::get('/', [ProductController::class, 'index'])->middleware('auth')->name('home');
 
-// Post view page
+// Home view page
+Route::get('/', [ProductController::class, 'index'])->name('home');
+
+// Product view page
 Route::get('products/{product:slug}', [ProductController::class, 'show'])->middleware('auth')->name('product.show');
+
 
 // Register page
 Route::get('/User-register', [RegisterController::class, 'create'])->middleware('guest');
@@ -28,13 +30,17 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 Route::post('/register-owner', [OwnerRegisterController::class, 'store'])->middleware('guest');
 
 
-// Login Logout
+// Login User
 Route::get('/login', [SessionsController::class, 'create'])->middleware('guest')->name('login');
 Route::post('/login', [SessionsController::class, 'store'])->middleware('guest');
-
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
-//mahmoudshawish2020@gmail.com
+
+// Login Owner
+Route::get('/login-owner', [SessionsController::class, 'createOwner'])->middleware('guest')->name('Ownerlogin');
+Route::post('/login-owner', [SessionsController::class, 'storeOwner'])->middleware('guest');
+Route::post('/logout-owner', [SessionsController::class, 'destroyOwner'])->middleware('owner');
+
 
 // Comment
 Route::post('/products/{product:slug}/comments', [ProductCommentsController::class, 'store']);
@@ -47,7 +53,7 @@ Route::post('/product/{product}/upvotes', [ProductUpvoteController::class, 'stor
 Route::post('/product/{product}/confirm', [ProductConfirmController::class, 'store'])->name('product.confirm');
 
 // Owners
-Route::get('/owner:{owner}/dashboard', [OwnerProductController::class, 'index'])->name('owner.dashboard');
-Route::get('/owners{owner}/products/create', [ProductController::class, 'create']);
-Route::post('/owner/products', [OwnerProductController::class, 'store']);
+Route::get('/owners:{owner}/dashboard', [OwnerProductController::class, 'index'])->middleware('owner')->name('owner.dashboard');
+Route::get('/owners:{owner}/create', [ProductController::class, 'create'])->middleware('owner');
+Route::post('/owner/products', [OwnerProductController::class, 'store'])->middleware('owner');
 

@@ -6,10 +6,13 @@
             <h4 class="font-semibold mb-4">Links</h4>
             <ul>
                 <li>
-                    <a href="/owner:{{ $products[0]->shop->owner->id }}/dashboard" class="{{ request()->is('owner:'. $products[0]->shop->owner->id .'/dashboard') ? 'text-blue-500' : '' }}">All Products</a>
+                    <a href="/owners:{{ $products[0]->shop->owner->id }}/dashboard"
+                       class="{{ request()->is('owners:'. $products[0]->shop->owner->id .'/dashboard') ? 'text-blue-500' : '' }}">All
+                        Products</a>
                 </li>
                 <li>
-                    <a href="/shop/products/create" class="{{ request()->is('shop/products/create') ? 'text-blue-500' : '' }}">New Product</a>
+                    <a href="/owners:{{ $products[0]->shop->owner->id }}/create"
+                       class="{{ request()->is('owners:'. $products[0]->shop->owner->id .'/create') ? 'text-blue-500' : '' }}">New Product</a>
                 </li>
             </ul>
         </aside>

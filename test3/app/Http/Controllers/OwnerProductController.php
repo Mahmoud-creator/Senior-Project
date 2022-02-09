@@ -11,6 +11,7 @@ class OwnerProductController extends Controller
 {
 
     public function index(Owner $owner){
+
         $shop = $owner->shop;
         $products = $shop->products;
 
@@ -22,14 +23,25 @@ class OwnerProductController extends Controller
     public function store()
     {
 
+        $owner = auth('owner')->user();
+
         $attributes = array_merge($this->validateProduct(),[
-            'shop_id' => request()->user()->shop,
+            'owner_id' => $owner->id,
             'thumbnail' => request()->file('thumbnail')->store("thumbnails")
         ]);
 
-        Product::create($attributes);
+        $product = Product::create([
+            'shop_id' => $owner->shop->id,
+            'category_id' => $attributes['category_id'],
+            'name' => $attributes['name'],
+            'slug' => $attributes['slug'],
+            'price' => $attributes['price'],
+            'thumbnail' => $attributes['thumbnail'],
+            'description' => $attributes['description'],
+            'is_verified' => false,
+        ]);
 
-        return redirect('/');
+        return redirect('/owners:'.auth('owner')->user()->id.'/dashboard');
     }
 
     protected function validateProduct(?Product $product = null)

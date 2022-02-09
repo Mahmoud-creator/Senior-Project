@@ -17,6 +17,14 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    'user' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
+    ],
+    'owner' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Owner::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +48,15 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'owner' => [
+            'driver' => 'session',
+            'provider' => 'owners'
+        ],
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users'
+        ]
+
     ],
 
     /*
@@ -69,6 +86,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'owners' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Owner::class,
+        ],
     ],
 
     /*
@@ -93,6 +115,10 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'owners' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Owner::class,
+        ]
     ],
 
     /*

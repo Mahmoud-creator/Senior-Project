@@ -25,8 +25,9 @@ class ProductController extends Controller
 
     public function create(Owner $owner)
     {
-        return view('admin.products.create',[
-            'owner' => $owner
+        $products = $owner->shop->products;
+        return view('owner.products.create',[
+            'products' => $products
         ]);
     }
 

@@ -45,7 +45,7 @@ class OwnerRegisterController extends Controller
             'street' => $attributes['street'],
         ]);
 
-        auth()->login($owner);
+        auth('owner')->login($owner);
 
         return redirect('/owner:'.$owner->id.'/dashboard')->with('success','Your shop account has been created!');
 

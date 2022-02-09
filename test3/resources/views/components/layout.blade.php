@@ -19,34 +19,49 @@
         </div>
 
         <div class="mt-8 md:mt-0 flex items-center">
-            @auth
+
+            @if(auth('owner')->user() !== null)
+                @php
+                    $id = auth('owner')->user()->id;
+                @endphp
+
+                <x-dropdown>
+                    <x-slot name="trigger">
+                        <button class="text-xs font-bold uppercase">Welcome, {{ auth('owner')->user()->name }}</button>
+                    </x-slot>
+
+                    <x-dropdown-item href="/owners:{{ $id }}/dashboard" :active="request()->is('/owners:$id/create')">All Products</x-dropdown-item>
+                    <x-dropdown-item href="/owners:{{ $id }}/create" :active="request()->is('/owners:{{ $id }}/create')">New Product</x-dropdown-item>
+
+                    <x-dropdown-item href="" x-data="{}" @click.prevent="document.querySelector('#owner-logout-form').submit()">Log Out</x-dropdown-item>
+                    <form id="owner-logout-form" method="POST" action="/logout-owner" class="hidden">
+                        @csrf
+                    </form>
+                </x-dropdown>
+            @endif
+
+            @if(auth()->user() !== null)
                 <x-dropdown>
                     <x-slot name="trigger">
                         <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</button>
                     </x-slot>
-{{--                    @admin--}}
-{{--                    <x-dropdown-item href="/admin/products" :active="request()->is('admin/products')">All Posts</x-dropdown-item>--}}
-{{--                    <x-dropdown-item href="/admin/products/create" :active="request()->is('admin/products/create')">New Post</x-dropdown-item>--}}
-{{--                    @endadmin--}}
-
                     <x-dropdown-item href="" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
-
                     <form id="logout-form" method="POST" action="/logout" class="hidden">
                         @csrf
                     </form>
                 </x-dropdown>
-            @else
-                <a href="/register" class="text-xs font-bold uppercase">Register</a>
-                <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
-            @endauth
+            @endif
+
+            @if(auth('owner')->user() == null and auth()->user() == null)
+                    <a href="/register" class="text-xs font-bold uppercase">Register</a>
+                    <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
+                @endif
 
             <a href="#newsletter" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                 Subscribe for Updates
             </a>
         </div>
     </nav>
-
-
 
     {{ $slot }}
 
