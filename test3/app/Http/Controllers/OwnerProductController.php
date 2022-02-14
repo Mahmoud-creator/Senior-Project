@@ -6,6 +6,7 @@ use App\Models\Owner;
 use App\Models\Product;
 use App\Models\Shop;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class OwnerProductController extends Controller
 {
@@ -43,6 +44,16 @@ class OwnerProductController extends Controller
 
         return redirect('/owners:'.auth('owner')->user()->id.'/dashboard');
     }
+
+    public function destroy(Owner $owner,Product $product){
+
+        if (auth('owner')->user()->id !== $owner->id){
+            return abort(403, 'Unauthorized action.');
+        }
+        $product->delete();
+        return back()->with('success','Post Deleted!');
+    }
+
 
     protected function validateProduct(?Product $product = null)
     {

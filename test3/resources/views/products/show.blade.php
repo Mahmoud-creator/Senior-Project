@@ -1,5 +1,4 @@
 <x-layout>
-
     <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
         <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
 
@@ -10,7 +9,7 @@
                        class=""
                     >{{ $product->price }}$</a>
                 </div>
-                <img src="/images/illustration-1.png" alt="" class="rounded-xl">
+                <img src="/storage/{{ $product->thumbnail }}" alt="" class="rounded-xl">
 
                 <p class="mt-4 block text-gray-400 text-xs">
                     Published <time>{{ $product->created_at->diffForHumans() }}</time>
@@ -39,7 +38,7 @@
                     <div x-data="{show: true}"
                          x-init="setTimeout(() => show = false, 4000)"
                          x-show="show"
-                         class="bg-red-400 text-white px-4 py-2 rounded-xl text-sm mt-8">
+                         class="bg-red-400 text-white px-4 py-2 rounded-xl text-sm mt-8 font-bold">
                         <p>
                             {{ session('stop') }}
                         </p>
@@ -48,7 +47,7 @@
                     <div x-data="{show: true}"
                          x-init="setTimeout(() => show = false, 4000)"
                          x-show="show"
-                         class="bg-blue-400 text-white px-4 py-2 rounded-xl text-sm mt-8">
+                         class="bg-blue-400 text-white px-4 py-2 rounded-xl text-sm mt-8 font-bold">
                         <p>
                             {{ session('omit') }}
                         </p>
@@ -73,10 +72,10 @@
                         Back to Products
                     </a>
                     <div class="space-x-2">
-                        <a href="#"
+                        <a href="/?shop={{ $product->shop->id }}"
                            class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                           style="font-size: 10px">Product Shop</a>
-                        <a href="#"
+                           style="font-size: 10px">{{ $product->shop->name }}</a>
+                        <a href="/?category={{ $product->category->slug }}"
                            class="px-3 py-1 border border-red-300 rounded-full text-red-300 text-xs uppercase font-semibold"
                            style="font-size: 10px">{{ $product->category->name }}</a>
                     </div>

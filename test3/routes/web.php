@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
 // Product view page
-Route::get('products/{product:slug}', [ProductController::class, 'show'])->middleware('auth')->name('product.show');
+Route::get('products/{product:slug}', [ProductController::class, 'show'])->name('product.show');
 
 
 // Register page
@@ -33,7 +33,7 @@ Route::post('/register-owner', [OwnerRegisterController::class, 'store'])->middl
 // Login User
 Route::get('/login', [SessionsController::class, 'create'])->middleware('guest')->name('login');
 Route::post('/login', [SessionsController::class, 'store'])->middleware('guest');
-Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
+Route::post('/logout', [SessionsController::class, 'destroy'])->middleware();
 
 
 // Login Owner
@@ -56,4 +56,5 @@ Route::post('/product/{product}/confirm', [ProductConfirmController::class, 'sto
 Route::get('/owners:{owner}/dashboard', [OwnerProductController::class, 'index'])->middleware('owner')->name('owner.dashboard');
 Route::get('/owners:{owner}/create', [ProductController::class, 'create'])->middleware('owner');
 Route::post('/owner/products', [OwnerProductController::class, 'store'])->middleware('owner');
+Route::delete('/owner:{owner}/product:{product}/delete', [OwnerProductController::class, 'destroy'])->middleware('owner');
 

@@ -8,6 +8,11 @@ class ProductConfirmController extends Controller
 {
     public function store(Product $product)
     {
+
+        if (auth()->user() === null and auth('owner')->user() === null) {
+            return back()->with('stop', 'You can not upvote or verify products if you are not signed in as user!');
+        }
+
         if($product->is_verified($product)){
             return back()->with('omit', 'This product is already verified!');
         }else{
