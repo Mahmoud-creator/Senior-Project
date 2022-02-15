@@ -11,9 +11,10 @@ class ProductUpvoteController extends Controller
     public function store(Product $product)
     {
 
-        if (auth()->user() === null and auth('owner')->user() === null) {
+        if (auth()->user() === null or auth('owner')->user() !== null) {
             return back()->with('stop', 'You can not upvote or verify products if you are not signed in as user!');
         }
+
 
 
         if ($product->upvotedBy(request()->user())->count()) {

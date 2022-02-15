@@ -18,7 +18,7 @@
             </a>
         </div>
 
-        <div class="mt-8 md:mt-0 flex items-center">
+        <div class="mt-8 md:mt-0 flex items-center space-x-2.5">
             @if(auth('owner')->user() !== null)
                 <a href="/owners:{{ auth('owner')->user()->id }}/dashboard" class="block text-left px-3 text-sm leading-6 hover:bg-blue-500 focus:bg-blue-500 hover:text-white focus:text-white h px-4 rounded-2xl font-semibold py-1">Dashboard</a>
                 <x-dropdown-item href="" x-data="{}" @click.prevent="document.querySelector('#owner-logout-form').submit()" class="block text-left px-3 text-sm leading-6 hover:bg-blue-500 focus:bg-blue-500 hover:text-white focus:text-white h px-4 rounded-2xl font-semibold py-1">Log Out</x-dropdown-item>
@@ -29,7 +29,7 @@
 
             @if(auth()->user() !== null)
                 <h3 class="text-xs font-bold uppercase">Welcome {{ auth()->user()->name }}</h3>
-                <a href="" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Log Out</a>
+                <a href="" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()" class="hover:text-blue-500">Log Out</a>
                 <form id="logout-form" method="POST" action="/logout" class="hidden">
                     @csrf
                 </form>

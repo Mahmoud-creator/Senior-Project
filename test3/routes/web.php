@@ -56,5 +56,12 @@ Route::post('/product/{product}/confirm', [ProductConfirmController::class, 'sto
 Route::get('/owners:{owner}/dashboard', [OwnerProductController::class, 'index'])->middleware('owner')->name('owner.dashboard');
 Route::get('/owners:{owner}/create', [ProductController::class, 'create'])->middleware('owner');
 Route::post('/owner/products', [OwnerProductController::class, 'store'])->middleware('owner');
+Route::post('/owner:{owner}/product:{product}/confirm', [OwnerProductController::class, 'confirm'])->middleware('owner');
 Route::delete('/owner:{owner}/product:{product}/delete', [OwnerProductController::class, 'destroy'])->middleware('owner');
+
+Route::get('/owner:{owner}/product:{product}/edit', [OwnerProductController::class, 'edit'])->middleware('owner');
+Route::patch('/owner/product:{product:id}/update', [OwnerProductController::class, 'update'])->middleware('owner');
+
+
+
 
