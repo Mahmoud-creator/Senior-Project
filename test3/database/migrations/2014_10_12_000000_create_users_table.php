@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        // name , age , gender , hobbies , google maps
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username')->unique();

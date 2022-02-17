@@ -2,29 +2,32 @@
     <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
         <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
 
-            <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
-                <div class="ro rounded-fu b bg-gray-100 rounded-full my-2 py-1 font-bold text-red-500">
+            <div class="col-span-5 lg:text-center lg:pt-14 mb-10">
+                <div class="bg-gray-100 rounded-full my-2 py-1 font-bold text-red-500 text-4xl lg:text-lg text-center mb-10 lg:mb-4">
                     Price:
                     <a
-                       class=""
+                        class=""
                     >{{ $product->price }}$</a>
                 </div>
                 <img src="/storage/{{ $product->thumbnail }}" alt="" class="rounded-xl">
 
                 <p class="mt-4 block text-gray-400 text-xs">
-                    Published <time>{{ $product->created_at->diffForHumans() }}</time>
+                    Published
+                    <time>{{ $product->created_at->diffForHumans() }}</time>
                 </p>
 
-                <div class="text-sm mt-4">
+                <div class="lg:text-sm mt-4 text-2xl">
                     <div class="grid grid-cols-2">
-                        <div class="ml-3 b align justify-aroun flex justify-around items-center rounded-full px-3.5 py-1.5 bg-gray-100 text-blue-500 hover:bg-blue-400 hover:text-white">
+                        <div
+                            class="ml-3 b align justify-aroun flex justify-around items-center rounded-full px-3.5 py-1.5 bg-gray-100 text-blue-500 hover:bg-blue-400 hover:text-white">
                             <form method="POST" action="/product/{{ $product->id }}/upvotes">
                                 @csrf
                                 <button>Upvote⬆</button>
                             </form>
                             <p>{{ $product->upvotes->count() }}</p>
                         </div>
-                        <div class="ml-3 b align justify-aroun flex justify-around items-center rounded-full px-3.5 py-1.5 bg-gray-100 text-blue-500 hover:bg-blue-400 hover:text-white">
+                        <div
+                            class="ml-3 b align justify-aroun flex justify-around items-center rounded-full px-3.5 py-1.5 bg-gray-100 text-blue-500 hover:bg-blue-400 hover:text-white">
                             <form method="POST" action="/product/{{ $product->id }}/confirm">
                                 @csrf
                                 <button class="">Verify✓</button>
@@ -53,9 +56,19 @@
                         </p>
                     </div>
                 @endif
+
+                <div class="mt-12">
+                    <h2 class="lg:text-sm font-semibold uppercase text-2xl text-center">Location</h2>
+                    <iframe
+                        class="mt-8 w-full"
+                        src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3612.4554709335553!2d35.49831881986617!3d33.87326532786658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m1!1m0!5e0!3m2!1sen!2slb!4v1645054325672!5m2!1sen!2slb"
+                        width="350px" height="200px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+                </div>
+
             </div>
 
-            <div class="col-span-8">
+            <div class="col-span-7">
                 <div class="hidden lg:flex justify-between mb-6">
                     <a href="/"
                        class="transition-colors duration-300 relative inline-flex items-center text-lg hover:text-blue-500">
