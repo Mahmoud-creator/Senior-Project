@@ -30,11 +30,19 @@
             @endif
 
             @if(auth()->user() !== null)
-                <h3 class="text-xs font-bold uppercase">Welcome {{ auth()->user()->name }}</h3>
-                <a href="" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()" class="hover:text-blue-500">Log Out</a>
-                <form id="logout-form" method="POST" action="/logout" class="hidden">
-                    @csrf
-                </form>
+                @if(auth()->user()->email === 'm@g.com')
+                        <a href="/admin/dashboard" class="block text-left px-3 text-sm leading-6 hover:bg-blue-500 focus:bg-blue-500 hover:text-white focus:text-white h px-4 rounded-2xl font-semibold py-1">Dashboard</a>
+                        <a href="" x-data="{}" @click.prevent="document.querySelector('#admin-logout-form').submit()" class="hover:text-blue-500">Log Out</a>
+                        <form id="admin-logout-form" method="POST" action="/logout" class="hidden">
+                            @csrf
+                        </form>
+                @else
+                    <h3 class="text-xs font-bold uppercase">Welcome {{ auth()->user()->name }}</h3>
+                    <a href="" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()" class="hover:text-blue-500">Log Out</a>
+                    <form id="logout-form" method="POST" action="/logout" class="hidden">
+                        @csrf
+                    </form>
+                @endif
             @endif
 
             @if(auth('owner')->user() == null and auth()->user() == null)

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OwnerProductController;
 use App\Http\Controllers\OwnerRegisterController;
 use App\Http\Controllers\ProductCommentsController;
@@ -44,6 +45,7 @@ Route::post('/logout-owner', [SessionsController::class, 'destroyOwner'])->middl
 
 // Comment
 Route::post('/products/{product:slug}/comments', [ProductCommentsController::class, 'store']);
+Route::delete('/products/{product}/comment:{comment}/delete', [ProductCommentsController::class, 'destroy']);
 
 
 // Upvote Product
@@ -62,6 +64,10 @@ Route::delete('/owner:{owner}/product:{product}/delete', [OwnerProductController
 Route::get('/owner:{owner}/product:{product}/edit', [OwnerProductController::class, 'edit'])->middleware('owner');
 Route::patch('/owner/product:{product:id}/update', [OwnerProductController::class, 'update'])->middleware('owner');
 
+// Admin
 
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware('auth');
+Route::post('/admin/shop:{shop}/confirm', [AdminController::class, 'confirm'])->middleware('auth');
+Route::delete('/admin/shop:{shop}/delete', [AdminController::class, 'destroy'])->middleware('auth');
 
 

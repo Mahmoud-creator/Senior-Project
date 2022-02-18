@@ -124,6 +124,13 @@
 
                 @foreach($product->comments as $comment)
                     <x-product-comment :comment="$comment"></x-product-comment>
+                    @if(auth()->user() !== null and auth()->user()->email == "m@g.com")
+                        <form method="post" action="/products/{{ $product->id }}/comment:{{ $comment->id }}/delete">
+                            @csrf
+                            @method('DELETE')
+                            <button class="text-red-400 hover:text-red-500 border border-red-500 hover:bg-red-100 rounded-full px-3 text-sm">Delete</button>
+                        </form>
+                    @endif
                 @endforeach
             </section>
         </article>
