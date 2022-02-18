@@ -16,7 +16,7 @@
                 </div>
             @endif
         @else
-            <p class="text-danger text-center">No products yet. Please check back later.</p>
+            <p class="text-danger text-center fon font-semibold text-2xl text-gray-500">No products yet. Please check back later.㋡</p>
         @endif
             {{ $products->links() }}
 

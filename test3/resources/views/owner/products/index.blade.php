@@ -2,11 +2,11 @@
     <x-panel class="max-w-7xl mt-10 mx-auto ">
         <div class="flex justify-between font-bold text-4xl text-gray-500 block my-9 mx-2 bg-gray-100 p-4 rounded-xl items-center ">
             <div class="flex">
-                <h1 >Dashboard</h1>
+                <h1>Dashboard</h1>
             </div>
             <div class="flex space-x-5">
-                <a href="/owners:{{ $products[0]->shop->owner->id }}/dashboard" class="font-bold text-xl {{ request()->is('owners:'.$products[0]->shop->owner->id.'/dashboard') ? "text-blue-400" : "" }}" >All Products</a>
-                <a href="/owners:{{ $products[0]->shop->owner->id }}/create" class="font-bold text-xl {{ request()->is('owners:'.$products[0]->shop->owner->id.'/create') ? "text-blue-400" : "" }}" >Add Product</a>
+                <a href="/owners:{{ $owner->id }}/dashboard" class="font-bold text-xl {{ request()->is('owners:'.$owner->id.'/dashboard') ? "text-blue-400" : "" }}" >All Products</a>
+                <a href="/owners:{{ $owner->id }}/create" class="font-bold text-xl {{ request()->is('owners:'.$owner->id.'/create') ? "text-blue-400" : "" }}" >Add Product</a>
             </div>
         </div>
 
@@ -86,10 +86,10 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $product->upvotes->count() }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="/owner:{{ $product->shop->owner->id }}/product:{{ $product->id }}/edit" class="text-blue-400 hover:text-blue-500">Edit</a>
+                                        <a href="/owner:{{ $owner->id }}/product:{{ $product->id }}/edit" class="text-blue-400 hover:text-blue-500">Edit</a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap   text-sm font-medium">
-                                        <form method="post" action="/owner:{{ $product->shop->owner->id }}/product:{{ $product->id }}/confirm">
+                                        <form method="post" action="/owner:{{ $owner->id }}/product:{{ $product->id }}/confirm">
                                             @csrf
                                             <button class="text-xs text-gray-400">Delete</button>
                                         </form>
@@ -105,7 +105,7 @@
 
     @else
 
-        <h1>No Products Have Been Added Yet!</h1>
+        <h1 class="text-center font-semibold text-2xl text-red-500 my-20">No Products Have Been Added Yet!</h1>
 
     @endif
 

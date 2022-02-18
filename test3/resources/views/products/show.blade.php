@@ -58,11 +58,27 @@
                 @endif
 
                 <div class="mt-12">
-                    <h2 class="lg:text-sm font-semibold uppercase text-2xl text-center">Location</h2>
-                    <iframe
-                        class="mt-8 w-full"
-                        src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3612.4554709335553!2d35.49831881986617!3d33.87326532786658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m1!1m0!5e0!3m2!1sen!2slb!4v1645054325672!5m2!1sen!2slb"
-                        width="350px" height="200px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="bg-gray-100 p-6 space-y-2 rounded-xl">
+                        <h2 class="lg:text-sm font-semibold uppercase text-2xl text-center text-blue-50 text-blue-500 mb-5 mb-6">Location</h2>
+                        <div class="space-y-2.5">
+                            <h2 class="lg:text-sm te text-left border text-gray-500 rounded-xl border-gray-300 px- px-6">Country: <span class="text-red-400">{{$product->shop->country}}</span></h2>
+                            <h2 class="lg:text-sm te text-left border text-gray-500 rounded-xl border-gray-300 px- px-6">City: <span class="text-red-400">{{$product->shop->city}}</span></h2>
+                            <h2 class="lg:text-sm te text-left border text-gray-500 rounded-xl border-gray-300 px- px-6">Street: <span class="text-red-400">{{$product->shop->street}}</span></h2>
+                        </div>
+                  </div>
+
+{{--                    <iframe--}}
+{{--                        class="mt-8 w-full"--}}
+{{--                        src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3612.4554709335553!2d35.49831881986617!3d33.87326532786658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m1!1m0!5e0!3m2!1sen!2slb!4v1645054325672!5m2!1sen!2slb"--}}
+{{--                        width="350px" height="200px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>--}}
+                    <x-mapbox id="mapId"
+                              :center="['long' => $location->longitude , 'lat' => $location->latitude ]"
+                              :draggable="true"
+                              class="w-12 mt-6"
+                              style="height: 500px; width: 100%; position: relative;"
+                              mapStyle="mapbox/navigation-night-v1"
+                              :markers="[['long' => $location->longitude , 'lat' => $location->latitude, 'description' => $location->location_name]]"
+                    ></x-mapbox>
 
                 </div>
 
@@ -99,7 +115,7 @@
                 </h1>
 
                 <div class="space-y-4 lg:text-lg leading-loose">
-                    {!! $product->description !!}
+                    <p>{!! $product->description !!}</p>
                 </div>
             </div>
             <section class="col-start-5 col-span-8 mt-10 space-y-6">

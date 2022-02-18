@@ -19,6 +19,8 @@ class OwnerProductController extends Controller
 
         return view('owner.products.index',[
             'products' => $products,
+            'shop' => $shop,
+            'owner' => $owner,
         ]);
     }
 

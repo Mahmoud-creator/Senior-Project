@@ -18,16 +18,22 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        $location = $product->shop->location;
         return view('products.show', [
-            'product' => $product
+            'product' => $product,
+            'location' => $location
         ]);
     }
 
     public function create(Owner $owner)
     {
-        $products = $owner->shop->products;
+        $shop = $owner->shop;
+        $products = $shop->products;
+
         return view('owner.products.create',[
-            'products' => $products
+            'products' => $products,
+            'shop' => $shop,
+            'owner' => $owner,
         ]);
     }
 

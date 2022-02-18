@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use App\Models\Owner;
 use App\Models\Shop;
 
@@ -15,6 +16,7 @@ class OwnerRegisterController extends Controller
     public function store()
     {
 
+
         $attributes = request()->validate([
             'owner_name' => 'required|max:255',
             'owner_phone' => 'required|unique:owners,phone',
@@ -26,16 +28,19 @@ class OwnerRegisterController extends Controller
             'city' => 'required|max:255',
             'street' => 'required|max:255',
             'password' => 'required|max:255|min:7',
+            'latitude' => 'required|between:-90,90',
+            'longitude' => 'required|between:-180,180'
         ]);
+
 
         $owner = Owner::create([
             'name' => $attributes['owner_name'],
             'phone' => $attributes['owner_phone'],
             'email' => $attributes['owner_email'],
-            'password' => $attributes['password'],
+            'password' => bcrypt($attributes['password']),
         ]);
 
-        Shop::create([
+        $shop = Shop::create([
             'owner_id' => $owner->id,
             'name' => $attributes['shop_name'],
             'phone' => $attributes['shop_phone'],
@@ -45,9 +50,15 @@ class OwnerRegisterController extends Controller
             'street' => $attributes['street'],
         ]);
 
-        auth('owner')->login($owner);
+        Location::create([
+            'shop_id' => $shop->id,
+            'location_name' => $attributes['street'].$attributes['city'].$attributes['country'],
+            'longitude' => $attributes['longitude'],
+            'latitude' => $attributes['latitude'],
+        ]);
 
-        return redirect('/owner:'.$owner->id.'/dashboard')->with('success','Your shop account has been created!');
+        auth('owner')->login($owner);
+        return redirect('/owners:'.$owner->id.'/dashboard')->with('success','Your shop account has been created!');
 
     }
 }
