@@ -1,0 +1,214 @@
++------------------------+
+| Tables_in_Pricenator   |
++------------------------+
+| categories             |
+| comments               |
+| confirms               |
+| failed_jobs            |
+| locations              |
+| migrations             |
+| owners                 |
+| password_resets        |
+| personal_access_tokens |
+| products               |
+| shops                  |
+| upvotes                |
+| users                  |
++------------------------+
+
+
+
+categories;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(255)    | NO   | UNI | NULL    |                |
+| slug       | varchar(255)    | NO   | UNI | NULL    |                |
+| created_at | timestamp       | YES  |     | NULL    |                |
+| updated_at | timestamp       | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+
+
+
+comments;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| product_id | bigint unsigned | NO   | MUL | NULL    |                |
+| user_id    | bigint unsigned | NO   | MUL | NULL    |                |
+| body       | text            | NO   |     | NULL    |                |
+| created_at | timestamp       | YES  |     | NULL    |                |
+| updated_at | timestamp       | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+
+
+
+confirms;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| user_id    | bigint unsigned | NO   | MUL | NULL    |                |
+| product_id | bigint unsigned | NO   | MUL | NULL    |                |
+| created_at | timestamp       | YES  |     | NULL    |                |
+| updated_at | timestamp       | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+
+
+
+failed_jobs;
++------------+-----------------+------+-----+-------------------+-------------------+
+| Field      | Type            | Null | Key | Default           | Extra             |
++------------+-----------------+------+-----+-------------------+-------------------+
+| id         | bigint unsigned | NO   | PRI | NULL              | auto_increment    |
+| uuid       | varchar(255)    | NO   | UNI | NULL              |                   |
+| connection | text            | NO   |     | NULL              |                   |
+| queue      | text            | NO   |     | NULL              |                   |
+| payload    | longtext        | NO   |     | NULL              |                   |
+| exception  | longtext        | NO   |     | NULL              |                   |
+| failed_at  | timestamp       | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++------------+-----------------+------+-----+-------------------+-------------------+
+
+
+
+locations;
++---------------+-----------------+------+-----+---------+----------------+
+| Field         | Type            | Null | Key | Default | Extra          |
++---------------+-----------------+------+-----+---------+----------------+
+| id            | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| shop_id       | bigint unsigned | NO   | MUL | NULL    |                |
+| location_name | varchar(255)    | NO   |     | NULL    |                |
+| longitude     | decimal(8,2)    | NO   |     | NULL    |                |
+| latitude      | decimal(8,2)    | NO   |     | NULL    |                |
+| created_at    | timestamp       | YES  |     | NULL    |                |
+| updated_at    | timestamp       | YES  |     | NULL    |                |
++---------------+-----------------+------+-----+---------+----------------+
+
+
+
+migrations;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | int unsigned | NO   | PRI | NULL    | auto_increment |
+| migration | varchar(255) | NO   |     | NULL    |                |
+| batch     | int          | NO   |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+
+
+
+owners;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(255)    | NO   |     | NULL    |                |
+| phone      | varchar(255)    | NO   | UNI | NULL    |                |
+| email      | varchar(255)    | NO   | UNI | NULL    |                |
+| password   | varchar(255)    | NO   |     | NULL    |                |
+| created_at | timestamp       | YES  |     | NULL    |                |
+| updated_at | timestamp       | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+
+
+
+password_resets;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| email      | varchar(255) | NO   | MUL | NULL    |       |
+| token      | varchar(255) | NO   |     | NULL    |       |
+| created_at | timestamp    | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+
+
+
+personal_access_tokens;
++----------------+-----------------+------+-----+---------+----------------+
+| Field          | Type            | Null | Key | Default | Extra          |
++----------------+-----------------+------+-----+---------+----------------+
+| id             | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| tokenable_type | varchar(255)    | NO   | MUL | NULL    |                |
+| tokenable_id   | bigint unsigned | NO   |     | NULL    |                |
+| name           | varchar(255)    | NO   |     | NULL    |                |
+| token          | varchar(64)     | NO   | UNI | NULL    |                |
+| abilities      | text            | YES  |     | NULL    |                |
+| last_used_at   | timestamp       | YES  |     | NULL    |                |
+| created_at     | timestamp       | YES  |     | NULL    |                |
+| updated_at     | timestamp       | YES  |     | NULL    |                |
++----------------+-----------------+------+-----+---------+----------------+
+
+
+
+products;
++--------------+-----------------+------+-----+---------+----------------+
+| Field        | Type            | Null | Key | Default | Extra          |
++--------------+-----------------+------+-----+---------+----------------+
+| id           | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| shop_id      | bigint unsigned | NO   | MUL | NULL    |                |
+| category_id  | bigint unsigned | NO   |     | NULL    |                |
+| name         | varchar(255)    | NO   |     | NULL    |                |
+| slug         | varchar(255)    | NO   | UNI | NULL    |                |
+| price        | int             | NO   |     | NULL    |                |
+| thumbnail    | varchar(255)    | YES  |     | NULL    |                |
+| description  | text            | NO   |     | NULL    |                |
+| is_verified  | tinyint(1)      | NO   |     | 0       |                |
+| published_at | timestamp       | YES  |     | NULL    |                |
+| created_at   | timestamp       | YES  |     | NULL    |                |
+| updated_at   | timestamp       | YES  |     | NULL    |                |
++--------------+-----------------+------+-----+---------+----------------+
+
+
+
+shops;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| owner_id   | bigint unsigned | NO   | MUL | NULL    |                |
+| name       | varchar(255)    | NO   |     | NULL    |                |
+| email      | varchar(255)    | NO   | UNI | NULL    |                |
+| country    | varchar(255)    | NO   |     | NULL    |                |
+| city       | varchar(255)    | NO   |     | NULL    |                |
+| street     | varchar(255)    | NO   |     | NULL    |                |
+| phone      | varchar(255)    | NO   | UNI | NULL    |                |
+| created_at | timestamp       | YES  |     | NULL    |                |
+| updated_at | timestamp       | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+
+
+
+upvotes;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| user_id    | bigint unsigned | NO   | MUL | NULL    |                |
+| product_id | bigint unsigned | NO   | MUL | NULL    |                |
+| created_at | timestamp       | YES  |     | NULL    |                |
+| updated_at | timestamp       | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+
+
+
+
+users;
++-------------------+-----------------+------+-----+---------+----------------+
+| Field             | Type            | Null | Key | Default | Extra          |
++-------------------+-----------------+------+-----+---------+----------------+
+| id                | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| username          | varchar(255)    | NO   | UNI | NULL    |                |
+| name              | varchar(255)    | NO   |     | NULL    |                |
+| email             | varchar(255)    | NO   | UNI | NULL    |                |
+| email_verified_at | timestamp       | YES  |     | NULL    |                |
+| password          | varchar(255)    | NO   |     | NULL    |                |
+| remember_token    | varchar(100)    | YES  |     | NULL    |                |
+| created_at        | timestamp       | YES  |     | NULL    |                |
+| updated_at        | timestamp       | YES  |     | NULL    |                |
++-------------------+-----------------+------+-----+---------+----------------+
+
+
+
+
