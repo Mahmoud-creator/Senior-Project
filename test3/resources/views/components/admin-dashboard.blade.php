@@ -17,20 +17,17 @@
                                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                                     <a
                                         href="/admin/dashboard"
-                                        class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                                        class="{{ request()->getRequestUri() === '/admin/dashboard' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} px-3 py-2 rounded-md text-sm font-medium"
                                         aria-current="page">Dashboard</a>
 
-                                    <a href="#"
-                                       class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+                                    <a href="/admin/products"
+                                       class="{{ request()->getRequestUri() === '/admin/products' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} px-3 py-2 rounded-md text-sm font-medium"
+                                       >Products</a>
 
-                                    <a href="#"
-                                       class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                                    <a href="/admin/comments"
+                                       class="{{ request()->getRequestUri() === '/admin/comments' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} px-3 py-2 rounded-md text-sm font-medium"
+                                    >Comments</a>
 
-                                    <a href="#"
-                                       class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
-
-                                    <a href="#"
-                                       class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Reports</a>
                                 </div>
                             </div>
                         </div>

@@ -67,7 +67,12 @@ Route::patch('/owner/product:{product:id}/update', [OwnerProductController::clas
 // Admin
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware('auth');
+Route::get('/admin/products', [AdminController::class, 'products'])->middleware('auth');
+Route::get('/admin/comments', [AdminController::class, 'comments'])->middleware('auth');
+
 Route::post('/admin/shop:{shop}/confirm', [AdminController::class, 'confirm'])->middleware('auth');
 Route::delete('/admin/shop:{shop}/delete', [AdminController::class, 'destroy'])->middleware('auth');
 
+Route::post('/admin/product:{product}/confirm', [AdminController::class, 'confirmP'])->middleware('auth');
+Route::delete('/admin/product:{product}/delete', [AdminController::class, 'destroyP'])->middleware('auth');
 

@@ -12,7 +12,7 @@ class ProductController extends Controller
         return view('products.index', [
             'products' => Product::orderBy('price', 'asc')
                 ->filter(request(['search','category','filter','shop']))
-                ->paginate(20)->withQueryString()
+                ->paginate(5)->withQueryString()
             ]);
     }
 
