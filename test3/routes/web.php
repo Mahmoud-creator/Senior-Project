@@ -1,16 +1,23 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\OwnerProductController;
 use App\Http\Controllers\OwnerRegisterController;
+use App\Http\Controllers\PasswordResetLinkController;
 use App\Http\Controllers\ProductCommentsController;
 use App\Http\Controllers\ProductConfirmController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductUpvoteController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 // Home view page
 Route::get('/', [ProductController::class, 'index'])->name('home');
@@ -36,6 +43,59 @@ Route::get('/login', [SessionsController::class, 'create'])->middleware('guest')
 Route::post('/login', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware();
 
+// Password Reset User
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+
+// Password Update
+
+Route::post('/reset-password', function (Request $request) {
+
+    $attributes = $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'token'),
+        function ($user, $password) {
+            $user->forceFill([
+                'password' => $password
+            ])->setRememberToken(Str::random(60));
+
+            $user->save();
+
+            event(new PasswordReset($user));
+        }
+    );
+
+
+
+    return $status === Password::PASSWORD_RESET
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
+})->middleware('guest')->name('password.update');
+
+//Route::post('reset-password', [NewPasswordController::class, 'store'])->middleware('guest')->name('password.update');
 
 // Login Owner
 Route::get('/login-owner', [SessionsController::class, 'createOwner'])->middleware('guest')->name('Ownerlogin');
@@ -76,3 +136,6 @@ Route::delete('/admin/shop:{shop}/delete', [AdminController::class, 'destroy'])-
 Route::post('/admin/product:{product}/confirm', [AdminController::class, 'confirmP'])->middleware('auth');
 Route::delete('/admin/product:{product}/delete', [AdminController::class, 'destroyP'])->middleware('auth');
 
+//Route::get('/test', function (){
+//    dd(Auth::user()->id);
+//});

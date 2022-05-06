@@ -109,11 +109,26 @@
                            style="font-size: 10px">{{ $product->category->name }}</a>
                     </div>
                 </div>
-
                 <h1 class="font-bold text-3xl lg:text-4xl mb-10">
                     {{ $product->name }}
                 </h1>
-
+                <div class="my-5 bg-gray-100 rounded-xl p-4">
+                    <div>
+                        <h2 class="text-blue-400">CPU <span class="text-red-400">Core-i7</span></h2>
+                    </div>
+                    <div>
+                        <h2 class="text-blue-400">RAM <span class="text-red-400">16-GB</span></h2>
+                    </div>
+                    <div>
+                        <h2 class="text-blue-400">SSD <span class="text-red-400">1-TB</span></h2>
+                    </div>
+                    <div>
+                        <h2 class="text-blue-400">OS <span class="text-red-400">Linux-Ubuntu</span></h2>
+                    </div>
+                    <div>
+                        <h2 class="text-blue-400">Size <span class="text-red-400">32-inch</span></h2>
+                    </div>
+                </div>
                 <div class="space-y-4 lg:text-lg leading-loose">
                     <p>{!! $product->description !!}</p>
                 </div>

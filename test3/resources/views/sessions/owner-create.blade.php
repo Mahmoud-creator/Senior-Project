@@ -13,15 +13,25 @@
                         </p>
                     </div>
                 @endif
+
+            <!-- Session Status -->
+                <x-auth-session-status class="mb-4" :status="session('status')"></x-auth-session-status>
+
+
                 <form method="POST" action="/login-owner" class="mt-10">
                     @csrf
                     <x-form.input name="email" type="email" autocomplete="username" autocomplete="off"></x-form.input>
                     <x-form.input name="password" type="password" autocomplete="password"></x-form.input>
-                    <x-form.button>Log In</x-form.button>
+                    <div class="flex items-center justify-around">
+                        <x-form.button>Log In</x-form.button>
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900 mt-6" href="/forgot-password">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    </div>
                 </form>
             </x-panel>
             <div class="flex flex-1">
-                <a href="/login" class="mx-auto">or login as user</a>
+                <a href="/login" class="mx-auto mt-8 text-blue-500">or login as user</a>
             </div>
         </main>
     </section>
